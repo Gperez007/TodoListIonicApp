@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title id="popover-button">Categorias 🔻</ion-title>
+    <ion-popover trigger="popover-button" [dismissOnSelect]="true">
+      <ng-template>
+        <ion-content>
+          <ion-list>
+            <ion-item [button]="true" [detail]="false">Default</ion-item>
+            <ion-item [button]="true" [detail]="false">Personal</ion-item>
+            <ion-item [button]="true" [detail]="false">Laboral</ion-item>
+            <ion-item [button]="true" [detail]="false">Realizadas</ion-item>
+            <ion-item [button]="true" [detail]="false">agregar +</ion-item>
+          </ion-list>
+        </ion-content>
+      </ng-template>
+    </ion-popover>
+
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="px-10">
+    <ion-searchbar placeholder="Buscar tarea"></ion-searchbar>
+  </div>
+  <app-list/>
+  <app-add-task />
+</ion-content>
