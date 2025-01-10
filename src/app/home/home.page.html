@@ -1,33 +1,44 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title id="popover-button">Categorias 🔻</ion-title>
-    <ion-popover trigger="popover-button" [dismissOnSelect]="true">
-      <ng-template>
-        <ion-content>
-          <ion-list>
-            <ion-item [button]="true" [detail]="false">Default</ion-item>
-            <ion-item [button]="true" [detail]="false">Personal</ion-item>
-            <ion-item [button]="true" [detail]="false">Laboral</ion-item>
-            <ion-item [button]="true" [detail]="false">Realizadas</ion-item>
-            <ion-item [button]="true" [detail]="false">agregar +</ion-item>
-          </ion-list>
-        </ion-content>
-      </ng-template>
-    </ion-popover>
+    <select
+      [(ngModel)]="category"
+      (ngModelChange)="onChange($event)"
+      class="w-full text-center text-xl"
+      name="categorie"
+      id="categorie"
+    >
+      <option value="default">Categorias</option>
+      @for (item of categories; track $index) {
+      <option value="{{item.categorie}}">{{item.categorie}}</option>
+      }
+    </select>
 
     <ion-buttons slot="end">
-      <ion-button>
+      <ion-button id="left-start">
         <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
       </ion-button>
     </ion-buttons>
-
+    <ion-popover trigger="left-start" side="left" alignment="start">
+      <ng-template>
+        <ion-list>
+          <ion-item [button]="true" [detail]="false" routerLink="/categorias"
+            >configuracion</ion-item
+          >
+          <ion-checkbox
+            class="px-3"
+            justify="space-between"
+            [(ngModel)]="showNumbering"
+            (ionChange)="onCheckboxChange($event)"
+            >Remote config</ion-checkbox
+          >
+        </ion-list>
+      </ng-template>
+    </ion-popover>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div class="px-10">
-    <ion-searchbar placeholder="Buscar tarea"></ion-searchbar>
-  </div>
-  <app-list/>
+  <app-searchbar />
+  <app-list />
   <app-add-task />
 </ion-content>

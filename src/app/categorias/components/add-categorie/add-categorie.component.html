@@ -1,0 +1,26 @@
+<ion-content class="ion-padding">
+    <ion-label position="stacked">Ingrese su categoría</ion-label>
+    <ion-grid>
+      <ion-row>
+        <!-- Input para ingresar la categoría -->
+        <ion-col size="9">
+          <ion-item>
+            <ion-input
+              type="text"
+              placeholder="Su categoría"
+              [(ngModel)]="name"
+              ngDefaultControl
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+  
+        <!-- Botón con ícono -->
+        <ion-col size="3" class="ion-text-center">
+          <ion-button expand="block" (click)="addCategorie()">
+            <ion-icon name="caret-forward" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+  

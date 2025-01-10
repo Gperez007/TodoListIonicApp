@@ -1,14 +1,38 @@
 <ion-list>
-  <ion-item >
-    <ion-checkbox class="p-3" justify="space-between">Space Between Label and Control</ion-checkbox>
-    <span>✏️</span>
+  @for (item of tasks; track item;let idx = $index, e = $even) {
+  <ion-item>
+    <ion-checkbox
+      class="p-3"
+      justify="space-between"
+      (ionChange)="toggleOption($event, idx)"
+      >{{ item.task }}</ion-checkbox
+    >
+
+    <ion-button [id]="'open-popover-' + idx">✏️</ion-button>
+
+    <ion-popover [keepContentsMounted]="true" [trigger]="'open-popover-' + idx">
+      <ng-template>
+        <ion-content class="ion-padding">
+          <ion-title class="ion-text-center">Editar tarea</ion-title>
+          <ion-input
+            [(ngModel)]="update"
+            placeholder="Ingrese la corrección de la tarea"
+            labelPlacement="stacked"
+            type="text"
+          ></ion-input>
+        </ion-content>
+        <ion-footer>
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-button (click)="cancelEdit()">Cancelar</ion-button>
+            </ion-buttons>
+            <ion-buttons slot="end">
+              <ion-button (click)="updateTask(idx)">Confirmar</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-footer>
+      </ng-template>
+    </ion-popover>
   </ion-item>
-  <ion-item >
-    <ion-checkbox class="p-3" justify="space-between">Space Between Label and Control</ion-checkbox>
-    <span>✏️</span>
-  </ion-item>
-  <ion-item >
-    <ion-checkbox class="p-3" justify="space-between">Space Between Label and Control</ion-checkbox>
-    <span>✏️</span>
-  </ion-item>
+  }
 </ion-list>

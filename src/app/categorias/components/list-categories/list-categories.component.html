@@ -1,0 +1,38 @@
+<ion-list>
+  @for (item of categories; track item;let idx = $index, e = $even) {
+  <ion-item>
+    <h2>{{item.categorie}}</h2>
+    <ion-buttons slot="end">
+        <ion-button [id]="'open-popover-' + idx">✏️</ion-button>
+        <ion-popover [keepContentsMounted]="true" [trigger]="'open-popover-' + idx">
+          <ng-template>
+            <ion-content class="ion-padding">
+              <ion-title class="ion-text-center">Editar tarea</ion-title>
+              <ion-input
+                [(ngModel)]="update"
+                placeholder="Ingrese la corrección de la tarea"
+                labelPlacement="stacked"
+                type="text"
+              ></ion-input>
+            </ion-content>
+            <ion-footer>
+              <ion-toolbar>
+                <ion-buttons slot="start">
+                  <ion-button (click)="cancelEdit()">Cancelar</ion-button>
+                </ion-buttons>
+                <ion-buttons slot="end">
+                  <ion-button (click)="updateCategorie(idx)">Confirmar</ion-button>
+                </ion-buttons>
+              </ion-toolbar>
+            </ion-footer>
+          </ng-template>
+        </ion-popover>
+
+
+        <ion-button (click)="removeCategorie(idx)">❌</ion-button>
+    </ion-buttons>
+  </ion-item>
+}@empty {
+  <ion-title class="ion-text-center">No hay ninguna categoria creada</ion-title>
+}
+</ion-list>
