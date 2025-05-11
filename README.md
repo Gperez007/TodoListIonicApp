@@ -25,7 +25,7 @@ Asegúrate de tener configurada tu cuenta de Firebase con las credenciales adecu
 Clona el repositorio en tu máquina local:
 
 ```bash
-git clone https://github.com/kamilo9809/to-do.git
+git clone https://github.com/Gperez007/TodoListIonicApp.git
 cd to-do
 ```
 
