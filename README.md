@@ -2,7 +2,7 @@
 
 ## Descripción
 
-Esta es una aplicación móvil construida con **Ionic** y **Angular**, que permite a los usuarios gestionar tareas y categorías de manera eficiente. La aplicación usa **Firebase Remote Config** para habilitar la numeración dinámica en una lista cuando se activa una opción en la interfaz.
+Esta es una aplicación móvil construida con **Ionic** y **Angular**, que permite a los usuarios gestionar tareas y categorías de manera eficiente. La aplicación usa **Firebase** para la numeración dinámica en una lista de interfaz.
 
 ## Requisitos
 
@@ -72,7 +72,7 @@ Esto abrirá la aplicación en tu navegador.
    - **Modularización del código**: 
    
    Dividi la aplicación en varios módulos y componentes reutilizables para facilitar la Separé todo en módulos y componentes
-    
+
    reutilizables.
 
    Hice pruebas unitarias con Jasmine y Karma para servicios clave.
