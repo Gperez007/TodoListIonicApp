@@ -47,19 +47,13 @@ ionic serve
 
 Esto abrirá la aplicación en tu navegador.
 
-## Cambios Realizados
-
-- Se implementó la integración con Firebase Remote Config para agregar numeración dinámica a la lista de tareas cuando se activa un botón.
-- Se creó un servicio de Firebase que gestiona la configuración remota y actualiza la interfaz de usuario de acuerdo con las configuraciones recibidas.
-- Se implementaron filtros y opciones de búsqueda avanzados para gestionar las tareas y categorías de forma más eficiente.
-
 
 ## Respuestas a las Preguntas
 
 1. **¿Cuáles fueron los principales desafíos que enfrentaste al implementar las nuevas funcionalidades?**
    Tuve que hacer downgrade en algunos paquetes porque Angular 19 no funcionaba bien con @ionic/angular, lo cual me tomó algo de tiempo.
 
-   Firebase offline también me dio problemas, pero logré resolverlo con persistencia local.
+   Firebase también me dio problemas, pero logré resolverlo con persistencia local.
 
    Al renderizar muchas tareas, usé trackBy en *ngFor porque noté que se re-renderizaba de más.
 
@@ -75,11 +69,12 @@ Esto abrirá la aplicación en tu navegador.
    - **Minificación de código**: Usamos el comando `ionic build --prod` para asegurarnos de que el código se minifique antes de la producción, reduciendo el tamaño de la aplicación y mejorando su rendimiento en dispositivos móviles.
 
 3. **¿Cómo aseguraste la calidad y mantenibilidad del código?**
-   - **Modularización del código**: Dividimos la aplicación en varios módulos y componentes reutilizables para facilitar la Separé todo en módulos y componentes reutilizables.
-
-   Usé servicios para manejar el estado global de las tareas y configuraciones.
+   - **Modularización del código**: 
+   
+   Dividi la aplicación en varios módulos y componentes reutilizables para facilitar la Separé todo en módulos y componentes
+    
+   reutilizables.
 
    Hice pruebas unitarias con Jasmine y Karma para servicios clave.
 
-   Documenté las funciones principales y cada componente para facilitar futuras modificaciones.
 

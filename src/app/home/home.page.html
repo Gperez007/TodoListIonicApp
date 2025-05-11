@@ -37,6 +37,15 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-input [(ngModel)]="nuevaTarea" placeholder="Nueva tarea"></ion-input>
+
+<ion-select [(ngModel)]="categoriaSeleccionada" placeholder="Selecciona categoría">
+  <ion-select-option value="-Cat001">Compras</ion-select-option>
+  <ion-select-option value="-Cat002">Trabajo</ion-select-option>
+</ion-select>
+
+<ion-button (click)="agregarTarea()">Guardar</ion-button>
+
 <ion-content [fullscreen]="true">
   <app-searchbar />
   <app-list />

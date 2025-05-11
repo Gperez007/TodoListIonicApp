@@ -58,6 +58,8 @@ export class HomePage implements OnInit {
   category: string = 'default';
   filteredCategory: any[] = [];
   tasks: any[] = [];
+   nuevaTarea = '';
+  categoriaSeleccionada = ''; // ID de categoría seleccionada
 
   constructor(
     private readonly categoriesService: CategoriesService,
@@ -103,5 +105,19 @@ export class HomePage implements OnInit {
     console.log(this.filteredCategory, 'ya está filtrado por categoría');
 
     this.filteredDataService.updateArray(this.filteredCategory);
+  }
+
+  agregarTarea() {
+    if (this.nuevaTarea.trim()) {
+      const tarea = {
+        titulo: this.nuevaTarea,
+        completada: false,
+        categoriaId: this.categoriaSeleccionada
+      };
+      this.firebaseService.guardarTarea(tarea).then(() => {
+        console.log('Tarea guardada con éxito');
+        this.nuevaTarea = '';
+      });
+    }
   }
 }
