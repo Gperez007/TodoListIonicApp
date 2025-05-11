@@ -70,13 +70,6 @@ Esto abrirá la aplicación en tu navegador.
    - **Pruebas unitarias**: Implementamos pruebas unitarias con Jasmine y Karma para verificar el comportamiento de los servicios y componentes.
    - **Documentación**: Documentamos cada componente y servicio, así como los flujos importantes dentro de la aplicación, para facilitar la comprensión del código por otros desarrolladores.
 
-
-
-## Contribuciones
-
-Si deseas contribuir a este proyecto, por favor abre un Pull Request o abre un Issue para discutir nuevas características o correcciones.
-
-
 ### Detalles Importantes:
 
 1. **Capturas de Pantalla**: Puedes agregar las capturas de pantalla donde se muestren las funcionalidades nuevas que has implementado.
