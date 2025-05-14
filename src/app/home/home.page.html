@@ -1,53 +1,90 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <select
-      [(ngModel)]="category"
-      (ngModelChange)="onChange($event)"
-      class="w-full text-center text-xl"
-      name="categorie"
-      id="categorie"
-    >
-      <option value="default">Categorias</option>
-      @for (item of categories; track $index) {
-      <option value="{{item.categorie}}">{{item.categorie}}</option>
-      }
-    </select>
+    <ion-title class="text-center text-xl font-bold">Lista de Tareas</ion-title>
 
     <ion-buttons slot="end">
       <ion-button id="left-start">
         <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
       </ion-button>
     </ion-buttons>
+
     <ion-popover trigger="left-start" side="left" alignment="start">
       <ng-template>
         <ion-list>
-          <ion-item [button]="true" [detail]="false" routerLink="/categorias"
-            >configuracion</ion-item
-          >
-          <ion-checkbox
-            class="px-3"
-            justify="space-between"
-            [(ngModel)]="showNumbering"
-            (ionChange)="onCheckboxChange($event)"
-            >Remote config</ion-checkbox
-          >
+          <ion-item button routerLink="/categorias">
+            Configuración de Categorías
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label>Remote Config</ion-label>
+            <ion-checkbox
+              slot="end"
+              [(ngModel)]="showNumbering"
+              (ionChange)="onCheckboxChange($event)">
+            </ion-checkbox>
+          </ion-item>
         </ion-list>
       </ng-template>
     </ion-popover>
   </ion-toolbar>
 </ion-header>
 
-<ion-input [(ngModel)]="nuevaTarea" placeholder="Nueva tarea"></ion-input>
-
-<ion-select [(ngModel)]="categoriaSeleccionada" placeholder="Selecciona categoría">
-  <ion-select-option value="-Cat001">Compras</ion-select-option>
-  <ion-select-option value="-Cat002">Trabajo</ion-select-option>
-</ion-select>
-
-<ion-button (click)="agregarTarea()">Guardar</ion-button>
-
 <ion-content [fullscreen]="true">
-  <app-searchbar />
-  <app-list />
-  <app-add-task />
+  <div class="max-w-xl mx-auto p-6 mt-4 bg-white rounded-xl shadow-md">
+
+    <!-- Filtro por categoría -->
+    <div class="mb-4">
+      <label class="block text-sm font-medium text-gray-700 mb-1">Filtrar por categoría</label>
+      <ion-item class="rounded-lg">
+        <ion-select
+          [(ngModel)]="category"
+          placeholder="Todas"
+          interface="popover"
+          (ionChange)="onChange($event.detail.value)">
+          <ion-select-option value="default">Todas</ion-select-option>
+          <ion-select-option *ngFor="let item of categories" [value]="item.categorie">
+            {{ item.categorie }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+
+    <!-- Crear nueva tarea -->
+    <div class="mb-4">
+      <label class="block text-sm font-medium text-gray-700 mb-1">Nueva tarea</label>
+      <ion-item class="rounded-lg">
+        <ion-input
+          placeholder="Nueva tarea"
+          [(ngModel)]="nuevaTarea"
+          clearInput>
+        </ion-input>
+      </ion-item>
+    </div>
+
+    <!-- Asignar categoría -->
+    <div class="mb-4">
+      <label class="block text-sm font-medium text-gray-700 mb-1">Asignar categoría</label>
+      <ion-item class="rounded-lg">
+        <ion-select
+          [(ngModel)]="categoriaSeleccionada"
+          placeholder="Selecciona"
+          interface="popover">
+          <ion-select-option *ngFor="let item of categories" [value]="item.categorie">
+            {{ item.categorie }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+
+    <!-- Botón guardar tarea -->
+    <ion-button expand="block" class="mt-4" (click)="agregarTarea()">
+      Guardar Tarea
+    </ion-button>
+  </div>
+
+  <!-- Componentes personalizados -->
+  <div class="max-w-xl mx-auto mt-6 px-4">
+    <app-searchbar></app-searchbar>
+    <app-list></app-list>
+    <app-add-task></app-add-task>
+  </div>
 </ion-content>

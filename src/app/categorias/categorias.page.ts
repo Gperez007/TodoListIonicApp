@@ -10,8 +10,7 @@ import {
   IonTitle,
   IonToolbar,
   IonIcon,
-  IonButtons,
-  IonButton, IonList, IonItem } from '@ionic/angular/standalone';
+ IonItem } from '@ionic/angular/standalone';
 import { RouterLink } from '@angular/router';
 import { ListCategoriesComponent } from "./components/list-categories/list-categories.component";
 import { AddCategorieComponent } from "./components/add-categorie/add-categorie.component";
@@ -21,9 +20,7 @@ import { AddCategorieComponent } from "./components/add-categorie/add-categorie.
   templateUrl: './categorias.page.html',
   styleUrls: ['./categorias.page.scss'],
   standalone: true,
-  imports: [IonItem, IonList,
-    IonButton,
-    IonButtons,
+  imports: [
     IonIcon,
     IonContent,
     IonHeader,
@@ -35,9 +32,6 @@ import { AddCategorieComponent } from "./components/add-categorie/add-categorie.
   providers:[]
 })
 export class CategoriasPage implements OnInit {
-  
-
-
 
   constructor() {
     addIcons({ arrowBack });

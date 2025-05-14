@@ -1,22 +1,39 @@
 <ion-list>
-  @for (item of tasks; track item;let idx = $index, e = $even) {
-  <ion-item>
-    <ion-checkbox
-      class="p-3"
-      justify="space-between"
-      (ionChange)="toggleOption($event, idx)"
-      >{{ item.task }}</ion-checkbox
-    >
+  <ion-item *ngFor="let item of tareas; let idx = index; trackBy: trackByIndex">
 
-    <ion-button [id]="'open-popover-' + idx">✏️</ion-button>
+    <!-- Checkbox para marcar como completada -->
+ <ion-checkbox
+  class="p-3"
+  [(ngModel)]="item.completada"
+  (ionChange)="toggleCompleted(idx)"
+  slot="start"
+></ion-checkbox>
 
-    <ion-popover [keepContentsMounted]="true" [trigger]="'open-popover-' + idx">
+    <!-- Título y categoría -->
+    <ion-label>
+      <h2 [class.completed]="item.completada">{{ item.titulo }}</h2>
+      <p>Categoría: {{ item.categoriaId || 'Sin categoría' }}</p>
+    </ion-label>
+
+    <!-- Botón Editar -->
+    <ion-button fill="clear" [id]="'open-popover-' + idx" slot="end">
+      ✏️
+    </ion-button>
+
+    <!-- Botón Eliminar -->
+    <ion-button fill="clear" color="danger" (click)="eliminarTarea(item.id)" slot="end">
+      🗑️
+    </ion-button>
+    
+
+    <!-- Popover para editar tarea -->
+    <ion-popover trigger="open-popover-{{idx}}" [keepContentsMounted]="true">
       <ng-template>
         <ion-content class="ion-padding">
           <ion-title class="ion-text-center">Editar tarea</ion-title>
           <ion-input
-            [(ngModel)]="update"
-            placeholder="Ingrese la corrección de la tarea"
+            [(ngModel)]="item.titulo"
+            placeholder="Nueva descripción"
             labelPlacement="stacked"
             type="text"
           ></ion-input>
@@ -27,12 +44,21 @@
               <ion-button (click)="cancelEdit()">Cancelar</ion-button>
             </ion-buttons>
             <ion-buttons slot="end">
-              <ion-button (click)="updateTask(idx)">Confirmar</ion-button>
+              <ion-button (click)="updateTask(item)">Confirmar</ion-button>
             </ion-buttons>
           </ion-toolbar>
         </ion-footer>
       </ng-template>
     </ion-popover>
   </ion-item>
-  }
 </ion-list>
+
+<ion-button *ngIf="featureEnabled" (click)="toggleFeature()">Nueva Funcionalidad</ion-button>
+
+<!-- Mostrar el ítem solo si la nueva funcionalidad está habilitada -->
+<ion-item *ngIf="featureEnabled">
+  <ion-label>
+    Esta es la nueva funcionalidad activada por el feature flag.
+  </ion-label>
+</ion-item>
+

@@ -2,64 +2,78 @@ import { Component, OnInit } from '@angular/core';
 import {
   IonHeader,
   IonToolbar,
+  IonTitle,
   IonContent,
   IonButton,
   IonButtons,
-  IonSearchbar,
   IonItem,
-  IonPopover,
   IonList,
-  IonTitle,
+  IonSelect,
+  IonSelectOption,
   IonIcon,
   IonCheckbox,
+  IonPopover,
+  IonInput,
+  IonLabel
 } from '@ionic/angular/standalone';
+
+import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+
+import { AddTaskComponent } from './components/add-task/add-task.component';
+import { SearchbarComponent } from './components/searchbar/searchbar.component';
+import { ListComponent } from './components/list/list.component';
+
 import { addIcons } from 'ionicons';
 import { ellipsisVertical } from 'ionicons/icons';
 
-import { ListComponent } from './components/list/list.component';
-import { AddTaskComponent } from './components/add-task/add-task.component';
-import { RouterLink } from '@angular/router';
-import { CategoriesService } from '../categorias/service/categories.service';
-import { SearchbarComponent } from './components/searchbar/searchbar.component';
-import { FormsModule } from '@angular/forms';
-import { FilteredDataService } from './services/filteredData/filtered-data.service';
-import { TaskService } from './services/TaskService/task.service';
 import { FirebaseService } from './services/remoteConfig/firebase.service';
+import { CategoriesService } from '../categorias/service/categories.service';
+import { FilteredDataService } from './services/filteredData/filtered-data.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  standalone: true,
   selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  standalone: true,
+  templateUrl: './home.page.html',
+  styleUrls: ['./home.page.scss'],
   imports: [
+    
+    CommonModule,
+    RouterLink,
+    FormsModule,
+    // Ionic
     IonHeader,
     IonToolbar,
+    IonTitle,
     IonContent,
     IonButton,
     IonButtons,
     IonItem,
-    IonPopover,
     IonList,
-    IonIcon,
-    ListComponent,
+    IonSelect,
+    IonSelectOption,
     IonIcon,
     IonCheckbox,
-    RouterLink,
+    IonPopover,
+    IonInput,
+    IonLabel,
+
+    // Componentes personalizados
     AddTaskComponent,
     SearchbarComponent,
-    FormsModule,
-  ],
-  providers: [CategoriesService],
+    ListComponent
+  ]
 })
 export class HomePage implements OnInit {
-  showNumbering: boolean = false;
-  showSearchBar: boolean = true;
-  categories!: any[];
+  showNumbering = false;
+  categories: any[] = [];
   category: string = 'default';
-  filteredCategory: any[] = [];
   tasks: any[] = [];
-   nuevaTarea = '';
-  categoriaSeleccionada = ''; // ID de categoría seleccionada
+  filteredCategory: any[] = [];
+
+  nuevaTarea = '';
+  categoriaSeleccionada = '';
 
   constructor(
     private readonly categoriesService: CategoriesService,
@@ -76,34 +90,23 @@ export class HomePage implements OnInit {
 
     this.filteredDataService.array$.subscribe((data) => {
       this.tasks = data;
-      console.log('estos son los tasks ', this.tasks);
     });
 
     await this.firebaseService.fetchRemoteConfig();
-    const numeracionActiva =
-      this.firebaseService.getConfigValue('activarNumeracion');
-    console.log('Numeración activa:', numeracionActiva);
+    const numeracionActiva = this.firebaseService.getConfigValue('activarNumeracion');
     this.showNumbering = numeracionActiva === 'true';
   }
 
   onCheckboxChange(event: any) {
     this.showNumbering = event.detail.checked;
-
     this.firebaseService.getConfigValue(this.showNumbering ? 'true' : 'false');
   }
 
   onChange(value: string) {
-    console.log(value);
-
-    const filterCategory = this.category.toLowerCase();
-    console.log('Tasks antes de filtrar:', this.tasks);
-
-    this.filteredCategory = this.tasks.filter((element) =>
-      element.categorie?.toLowerCase().includes(filterCategory)
+    const filterCategory = value.toLowerCase();
+    this.filteredCategory = this.tasks.filter(task =>
+      task.categorie?.toLowerCase().includes(filterCategory)
     );
-
-    console.log(this.filteredCategory, 'ya está filtrado por categoría');
-
     this.filteredDataService.updateArray(this.filteredCategory);
   }
 
@@ -115,7 +118,6 @@ export class HomePage implements OnInit {
         categoriaId: this.categoriaSeleccionada
       };
       this.firebaseService.guardarTarea(tarea).then(() => {
-        console.log('Tarea guardada con éxito');
         this.nuevaTarea = '';
       });
     }
