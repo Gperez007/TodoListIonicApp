@@ -21,7 +21,7 @@
     "@angular/forms": "^19.2.10",
     "@angular/platform-browser": "^19.0.0",
     "@angular/platform-browser-dynamic": "^19.0.0",
-    "@angular/router": "^19.0.0",
+    "@angular/router": "^19.2.10",
     "@angular/service-worker": "^19.0.0",
     "@capacitor/android": "6.2.0",
     "@capacitor/app": "6.0.2",
@@ -54,6 +54,12 @@
     "@typescript-eslint/eslint-plugin": "^8.18.0",
     "@typescript-eslint/parser": "^8.18.0",
     "autoprefixer": "^10.4.21",
+    "cordova-android": "^14.0.1",
+    "cordova-plugin-device": "2.0.2",
+    "cordova-plugin-ionic-keyboard": "^2.0.5",
+    "cordova-plugin-ionic-webview": "^5.0.0",
+    "cordova-plugin-splashscreen": "5.0.2",
+    "cordova-plugin-statusbar": "^2.4.2",
     "eslint": "^9.16.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsdoc": "^48.2.1",
@@ -84,5 +90,17 @@
     "Edge >=79",
     "Safari >=14",
     "iOS >=14"
-  ]
+  ],
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-device": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-ionic-webview": {},
+      "cordova-plugin-ionic-keyboard": {}
+    },
+    "platforms": [
+      "android"
+    ]
+  }
 }
