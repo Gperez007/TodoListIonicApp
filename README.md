@@ -77,4 +77,24 @@ Esto abrirá la aplicación en tu navegador.
 
    Hice pruebas unitarias con Jasmine y Karma para servicios clave.
 
+3. **instrucciones compilar ejecutar la aplicación en dispositivos o emuladores de Android e iOS.**
 
+📱 Compilar y ejecutar la aplicación en Android e iOS
+
+  npm install -g @ionic/cli cordova
+
+  📦 Instalar dependencias del proyecto
+
+  npm install
+
+  ▶️ Ejecutar en dispositivo Android (USB)
+   
+   adb devices
+
+  ionic cordova run android --device
+
+  🍎 Ejecutar en dispositivo o simulador iOS (solo macOS)
+
+  ionic cordova build ios
+  open platforms/ios/*.xcworkspace
+  
